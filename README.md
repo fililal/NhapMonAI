@@ -26,3 +26,27 @@ pip install -r 'requirements.txt'
 - Hàm khởi tạo và các hàm liên quan đến quá trình gợi ý: Người dùng không cần quan tâm đến các hàm này, đối tượng đã được khởi tạo thông qua hàm process() ở trên
 
 - Hàm thay đổi dữ liệu: add_new_rating(user, movie, rating) và change_rating(user, movie, rating)
+
+## Thực thi chương trình
+
+Tạm thời chương trình có thể chạy trên console như sau:
+
+Lưu ý: Tập dữ liệu movielens-100k user, movie được đánh id từ 1, ở đây đã chuẩn hóa dữ liệu với id được đánh từ 0
+
+```bash
+import pandas as pd 
+import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+from sklearn.metrics.pairwise import cosine_similarity
+from scipy import sparse
+from Memory_Base import Memory_Base
+import process as app
+
+# các hàm trong process có thể sử dụng thông qua app
+# model.recommend(user) trả về một list các bộ phim  đề xuất cho người dùng
+model = app.process()
+print(model.recommend(0))
+model.change_rating(0, 32, 5)
+app.save_data(model.rate, model.similarity_matrix)
+```
